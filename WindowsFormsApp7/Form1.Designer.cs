@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp7
@@ -41,6 +45,7 @@ namespace WindowsFormsApp7
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -113,7 +118,8 @@ namespace WindowsFormsApp7
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
-            this.button1.Text = "Save";
+            this.button1.BackgroundImage = Properties.Resources.star_white;
+            this.button1.BackgroundImageLayout = ImageLayout.Stretch;
             this.button1.Click += Button1_Click;
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -124,11 +130,22 @@ namespace WindowsFormsApp7
             this.listBox.Size = new System.Drawing.Size(174, 212);
             this.listBox.TabIndex = 0;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(199, 254);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Click += Button2_Click;
+            this.button2.Text = "Reset";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 300);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -146,14 +163,17 @@ namespace WindowsFormsApp7
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            listBox.Items.Clear();
+        }
 
         private void Button1_Click(object sender, EventArgs e)
         {
             listBox.Items.Add(panel1.BackColor);
+            SaveListToFile(listBox, "list.txt");
         }
 
         private void TrackBar1_ValueChanged(object sender, System.EventArgs e)
@@ -171,6 +191,7 @@ namespace WindowsFormsApp7
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private Button button2;
     }
 }
 
